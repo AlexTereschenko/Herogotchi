@@ -1,49 +1,8 @@
-const names = [
-    {name: 'Thorryn Kegg', gender: 'male'},
-    {name: 'Oshin Cowin', gender: 'male'},
-    {name: 'Lucas Gawne', gender: 'male'},
-    {name: 'Parlance Elenagh', gender: 'male'},
-    {name: 'Sandulf Mason', gender: 'male'},
-    {name: 'Gavan Ireshman', gender: 'male'},
-    {name: 'Yvon Corris', gender: 'male'},
-    {name: 'Stiurt Quilleash', gender: 'male'},
-    {name: 'Abel Flecher', gender: 'female'},
-    {name: 'Dolyn Birmingham', gender: 'female'},
-    {name: 'Agnes Shimmin', gender: 'female'},
-    {name: 'Ina Teare', gender: 'female'},
-    {name: 'Caly Jakson', gender: 'female'},
-    {name: 'Mureal Wilson', gender: 'female'},
-    {name: 'Roseen Hik', gender: 'female'},
-    {name: 'Fritha Owle', gender: 'female'},
-    {name: 'Vorgel Halsall', gender: 'male'},
-    {name: 'Mariot Cowpeland', gender: 'male'},
-    {name: 'Crera Hampton', gender: 'male'},
-    {name: 'Kerron Nelson', gender: 'male'},
-    {name: 'Austeyn Cottier', gender: 'male'},
-    {name: 'John Halsall', gender: 'male'},
-    {name: 'Peter Moresson', gender: 'male'},
-    {name: 'George Gill', gender: 'male'},
-    {name: 'Aleyn Wilye', gender: 'male'},
-    {name: 'Albyn More', gender: 'male'},
-    {name: 'Ivar Looney', gender: 'male'},
-    {name: 'Thorgil Oats', gender: 'male'},
-    {name: 'Oter Vause', gender: 'male'},
-    {name: 'Lulach Sharpe', gender: 'male'},
-    {name: 'Joan Quarrie', gender: 'male'},
-    {name: 'Breeshey Callow', gender: 'male'},
-    {name: 'Ailstreena Cleator', gender: 'female'},
-    {name: 'Elena Gall', gender: 'female'},
-    {name: 'Matilda Watterson', gender: 'female'},
-    {name: 'Emell Thomson', gender: 'female'},
-    {name: 'Alice Creer', gender: 'female'},
-    {name: 'Breesha Quinney', gender: 'female'},
-    {name: 'Bahie Faraund', gender: 'female'},
-    {name: 'Manana Baily', gender: 'female'},
-]
-const randomizer = (n) => { 
+import persons from '../data/persons.json' assert {type: 'json'};
+
+const getRandomNumber = (n) => { 
     return Math.floor(Math.random() * n)
 }
-
 
 //add hero logic
 const heroes = document.getElementById('heroes');
@@ -54,13 +13,14 @@ addHeroBtn.addEventListener('click', () => {
     const hero = new Adventurer();
     heroList.push(hero)
     const heroTemplate = 
-    `<div class="info flex-container unselectable">
+    `<div class="message flex-container unselectable hide js-message"></div>
+    <div class="info flex-container unselectable">
         <div class="avatar flex-container">
             <img src="img/avatar/${hero.gender}.png" alt="avatar" class="js-avatar">
             <p class="name"><span class="stat">${hero.name}</span></p>
             <p class="age">Age: <span class="stat js-age">${hero.age}</span></p>
             <p class="money">Money: <span class="stat js-money">${hero.money}</span></p>
-            <p class="honour">Honour: <span class="stat js-honour">${hero.honour}</span></p>
+            <p class="fame">Fame: <span class="stat js-fame">${hero.fame}</span></p>
         </div>
         <div class="prior-stats flex-container">
             <div class="health prior-stat flex-container">
@@ -89,27 +49,15 @@ addHeroBtn.addEventListener('click', () => {
             </div>
         </div>
     </div>
+
     <div class="tasks flex-container">
-        <span class="material-symbols-outlined btn js-btn__feed task unselectable disabled" data-task="feed">
-            restaurant_menu
-        </span>
-        <span class="material-symbols-outlined  btn js-btn__brothel task unselectable disabled" data-task="visit brothel">
-            hotel
-        </span>
-        <span class="material-symbols-outlined  btn js-btn__relax task unselectable" data-task="relax">
-            self_improvement
-        </span>
-        <span class="material-symbols-outlined  btn js-btn__farm task unselectable" data-task="work on farm">
-            grass
-        </span>
-        <span class="material-symbols-outlined  btn js-btn__forge task unselectable" data-task="work on forge">
-            construction
-        </span>
-        <span class="material-symbols-outlined  btn js-btn__adventure task unselectable" data-task="adventure">
-            swords
-        </span>
-    </div>
-    <div class="message flex-container unselectable hide js-message"></div>`
+        <button class="btn js-btn__feed task disabled" data-task="feed"><span class="material-symbols-outlined unselectable icon">restaurant_menu</span></button>
+        <button class="btn js-btn__brothel task disabled" data-task="visit brothel"><span class="material-symbols-outlined unselectable icon">hotel</span></button>
+        <button class="btn js-btn__relax task" data-task="relax"><span class="material-symbols-outlined unselectable icon">self_improvement</span></button>
+        <button class="btn js-btn__farm task" data-task="work on farm"><span class="material-symbols-outlined unselectable icon">grass</span></button>
+        <button class="btn js-btn__forge task" data-task="work on forge"><span class="material-symbols-outlined unselectable icon">construction</span></button>
+        <button class="btn js-btn__adventure task" data-task="adventure"><span class="material-symbols-outlined unselectable icon">swords</span></button>
+    </div>`
     const section = document.createElement('section');
     section.classList.add('adventurer');
     section.classList.add('flex-container');
@@ -117,7 +65,6 @@ addHeroBtn.addEventListener('click', () => {
     section.innerHTML = heroTemplate;
     heroes.append(section);
 
-    
     //deadman screen
     const deadmanScreens = document.getElementsByClassName('js-message');
 
@@ -135,7 +82,7 @@ addHeroBtn.addEventListener('click', () => {
     //stats
     const ageStat = document.getElementsByClassName('js-age');
     const moneyStat = document.getElementsByClassName('js-money');
-    const honourStat = document.getElementsByClassName('js-honour');
+    const fameStat = document.getElementsByClassName('js-fame');
 
     //bars
     const healthBar = document.getElementsByClassName('js-health');
@@ -148,7 +95,7 @@ addHeroBtn.addEventListener('click', () => {
     const heroBars = {
         'age': [...ageStat][current],
         'money': [...moneyStat][current],
-        'honour': [...honourStat][current],
+        'fame': [...fameStat][current],
 
         'health': [...healthBar][current], 
         'strenght': [...strenghtBar][current], 
@@ -195,18 +142,18 @@ addHeroBtn.addEventListener('click', () => {
 class Adventurer {
     //constructor
     constructor() {
-        const randomKidNumber = randomizer(names.length);
-        this.name = names[randomKidNumber].name,
-        this.age = 18-randomizer(3),
-        this.money = 0,
-        this.honour = 0,
+        const randomKidNumber = getRandomNumber(persons.length);
+        this.name = persons[randomKidNumber].name,
+        this.age = 18-getRandomNumber(3),
+        this.money = 2,
+        this.fame = 0,
 
         this.health = 100,
         this.strength = 100,
         this.saturation = 100,
         this.happiness = 100,
 
-        this.gender = names[randomKidNumber].gender === 'male' ? 'male' : 'female',
+        this.gender = persons[randomKidNumber].gender === 'male' ? 'male' : 'female',
         this.alive = true
     };
 
@@ -216,10 +163,9 @@ class Adventurer {
             if (this.money - 10 >= 0) {
                 this.money -= 10;
                 (this.saturation + 15) <= 100 ? this.saturation += 15 : this.saturation = 100;
-                this.refreshStatus(stats, btns);
-            } else {
-                this.refreshStatus(stats, btns);
+                (this.health + 5) <= 100 ? this.health += 5 : this.health = 100;
             };
+            this.refreshStatus(stats, btns);
         };
     };
     wentToBrothel(stats = false, btns = false) {
@@ -227,11 +173,9 @@ class Adventurer {
             if (this.money - 20 >= 0) {
                 this.money -= 20;
                 (this.happiness + 20) <= 100 ? this.happiness += 20 : this.happiness = 100;
-                (this.health + 20) <= 100 ? this.health += 20 : this.health = 100;
-                this.refreshStatus(stats, btns);
-            } else {
-                this.refreshStatus(stats, btns);
+                (this.health - 10) <= 100 ? this.health -= 10 : this.health = 100;
             };
+            this.refreshStatus(stats, btns);
         };
     };
 
@@ -254,6 +198,7 @@ class Adventurer {
     workOnFarm(stats = false, btns = false) {
         if (this.alive) {
             this.age +=1;
+            (this.saturation + 1) <= 100 ? this.saturation += 1 : this.saturation = 100;
             if ((this.strength - 2) > 0) {
                 this.strength -= 2;
             } else {
@@ -321,8 +266,8 @@ class Adventurer {
                 this.alive = false;
             };
             (this.happiness + 10) <= 100 ? this.happiness += 10 : this.happiness = 100;
-            this.money += 10 + randomizer(20);
-            this.honour += randomizer(4);
+            this.money += 10 + getRandomNumber(20);
+            this.fame += getRandomNumber(4);
             
             this.refreshStatus(stats, btns);
         };
@@ -331,7 +276,7 @@ class Adventurer {
     start(stats = false, btns = false) {
         let reason;
 
-        const lifespan = 85 - randomizer(60);
+        const lifespan = 85 - getRandomNumber(30) - getRandomNumber(30); // two times minus randomizer gives Gauss probability distribution (more likely lifespan = +-55, less likely close to 25 or 85)
         const interval = setInterval(() => {
             if (this.alive) {
                 //aging
@@ -383,7 +328,7 @@ class Adventurer {
         clearInterval(interval);
 
         const appeal = this.gender === 'male' ? 'him' : 'her';
-        const goal = this.honour >= 10 ? `but legends about ${appeal} never dies!`: `and no one will remember ${appeal} tomorrow...`;
+        const goal = this.fame >= 10 ? `but legends about ${appeal} never dies!`: `and no one will remember ${appeal} tomorrow...`;
 
         stats.deadmanScreen.innerHTML = `${this.name} died at the age of ${this.age} ${reason} ${goal}`;
         stats.deadmanScreen.classList.remove('hide');
@@ -407,7 +352,7 @@ class Adventurer {
   
         stats.age.innerHTML = this.age;
         stats.money.innerHTML = this.money;
-        stats.honour.innerHTML = this.honour;
+        stats.fame.innerHTML = this.fame;
     
         stats.health.style = `width: ${100-this.health}%`;
         stats.strenght.style = `width: ${100-this.strength}%`;
@@ -415,3 +360,10 @@ class Adventurer {
         stats.happiness.style = `width: ${100-this.happiness}%`;
     }
 };
+
+//faq toggling logic
+const faqBtn = document.querySelector('.js-btn__faq')
+const faq = document.querySelector('.js-faq');
+faqBtn.addEventListener('click', () => {
+    faq.classList.toggle('hide');
+});
