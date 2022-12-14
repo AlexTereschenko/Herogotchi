@@ -22,19 +22,44 @@
             <h1 class="flex-container">Herogotchi</h1>
             <h2 class="flex-container">
                 Your's little hero journey start here
-                <span class="material-symbols-outlined btn js-btn__add unselectable">
-                    person_add
-                </span>
+                <button class="btn btn__add js-btn__add"><span class="material-symbols-outlined icon unselectable">person_add</span></button>
             </h2>
         </header>
 
-        <main class="main">
+        <main>
             <article class="heroes flex-container js-heroes" id="heroes">
             </article>
+
+            <aside class="faq hide js-faq">
+                <p>You take care of a teenager from the 13th century, you set a goal for yourself, it can be like trying to write his/her life in history, or maybe you will try to live as long as possible?!</p>
+
+                <img src="img/faq.jpg" alt="tasks reminder" class="faq--img">
+                
+                <p>After pressing the button to add an adventurer <span class="material-symbols-outlined icon">person_add</span>, his/her life cycle begins immediately.</p>
+                <p>Every two seconds, the avatar becomes elder and loses a small amount of all stats and pays the cost of living in the amount of 2 coins, if the required amount is not available, the avatar will become a beggar, which will cause a significant decrease in stats, so keep an eye on the level of finances.</p>
+    
+                <ul>There are three main methods of obtaining finance:
+                    <li>1) Working on a farm <span class="material-symbols-outlined icon">grass</span> is the easiest way, where you spend strength and happiness to get a small compensation in money and food;</li>
+                    <li>2) Working at a forge <span class="material-symbols-outlined icon">construction</span> - consumes a significant part of health, strength, saturation and happiness, but you get a decent salary;</li>
+                    <li>3) Go on an adventure <span class="material-symbols-outlined icon">swords</span> - the most dangerous venture where you spend a large part of strength, saturation and health in exchange for a small monetary reward and an increase in happiness, but this is the only way to get fame and write the life of the avatar in history.</li>
+                </ul>
+
+                <p>Maintaining vital indicators is the main problem of the game, when any indicator drops to zero, the avatar dies (gets a terrible disease, gets fatally overworked, dies of hunger or commits suicide).</p>
+                <p>Health increases while feeding <span class="material-symbols-outlined icon">restaurant_menu</span>.</p>
+                <p>Strength increases while resting <span class="material-symbols-outlined icon">self_improvement</span> in exchange for saturation.</p>
+                <p>Saturation can be raised by feeding <span class="material-symbols-outlined icon">restaurant_menu</span>, or maintained by working on the farm <span class="material-symbols-outlined icon">grass</span>.</p>
+                <p>Happiness can be obtained either by visiting a brothel <span class="material-symbols-outlined icon">hotel</span> or by going on an adventure <span class="material-symbols-outlined icon">swords</span>.</p>
+                <p>Feeding <span class="material-symbols-outlined icon">restaurant_menu</span> costs 10 coins, visiting a brothel <span class="material-symbols-outlined icon">hotel</span> costs 20 so sometimes it wouldn't be available.</p>
+                <blockquote class="reminder">Remember: adventurers live short, but brightly and make history, while others live long but unhappy lives.</blockquote>
+            </aside>
         </main>
+        
+        <footer class="footer flex-container">
+            <button class="btn btn__faq js-btn__faq"><span class="material-symbols-outlined icon unselectable">Quiz</span></button>
+        </footer>
     </div>
 
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 
 </html>

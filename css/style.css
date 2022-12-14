@@ -14,6 +14,7 @@
 
 body {
     background: #525252;
+    padding: 0 0 60px;
 }
 
 .wrapper {
@@ -72,6 +73,7 @@ header, .avatar, .prior-stats, .tasks, .prior-stat {
     background: #000000a7;
     text-align: center;
     padding: 2rem;
+    z-index: 1;
 }
 
 .task {
@@ -95,7 +97,7 @@ header, .avatar, .prior-stats, .tasks, .prior-stat {
 }
 
 .task.disabled, .task.disabled:hover {
-    background: #8181817c;
+    background: #2323237c;
     color: #0000007c;
     cursor: auto;
     pointer-events: none;
@@ -134,17 +136,69 @@ header, .avatar, .prior-stats, .tasks, .prior-stat {
 .btn {
     cursor: pointer;
     transition: 0.5s;
-    color: #ffffff;
+    background: #848484;
+    color: #000000;
+    padding: 0;
+    width: 28px;
+    height: 28px;
 }
 
 .btn:hover {
     background: #bebebe;
-    color: #000000;
 }
 
 .btn:active {
     background: #818181;
+}
+
+.btn:hover .icon {
     color: #000000;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: #292929;
+    z-index: 10;
+    border-top: 2px solid #ffffff;
+}
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 1rem 1rem 44px;
+    background: #000;
+    gap: 0.5rem;
+    text-indent: 1rem;
+    line-height: 1.5;
+    min-height: 100vh;
+    z-index: 2;
+}
+
+.faq--img {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.faq .icon {
+    font-size: 1rem;
+    border: 1px solid #ffffff;
+    display: inline;
+    padding: 0 1.5px;
+}
+
+.reminder {
+    color: #000000;
+    padding: 1rem;
+    margin: 0 -1rem;
+    background: red;
 }
 
 .hide {
